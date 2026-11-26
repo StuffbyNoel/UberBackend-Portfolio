@@ -51,12 +51,40 @@
             </div>
         </div>
 
-        <!-- Main Media Placeholder (Explainer Video Embed) -->
-        <div class="w-full max-w-5xl aspect-video bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm relative group overflow-hidden flex items-center justify-center">
-            <!-- Replace this <p> with a <video> or YouTube/Vimeo <iframe> when ready -->
-            <p class="font-bebas text-3xl md:text-4xl text-[#2a2a2a] tracking-widest text-center px-4 group-hover:scale-110 transition-transform duration-700">
-                FINAL EXPLAINER VIDEO / EMBED
-            </p>
+        <!-- Main Explainer Video Showcase (16:9 Widescreen) -->
+        <!-- Rename your video file to 'Uber_Backend.mp4' or update the src below to match -->
+        <div class="w-full max-w-5xl aspect-video bg-[#0a0a0a] border border-[#2a2a2a] hover:border-white/40 rounded-sm relative group overflow-hidden flex items-center justify-center shadow-2xl transition-colors duration-300">
+            <video
+                id="uber-explainer-video"
+                src="./Uber_HIW.mp4"
+                autoplay
+                loop
+                muted
+                playsinline
+                controls
+                class="w-full h-full object-cover"
+            ></video>
+
+            <!-- Label Badge -->
+            <span class="absolute top-3 left-3 bg-black/75 border border-white/15 backdrop-blur-sm px-2.5 py-0.5 rounded text-xs font-bebas tracking-widest text-gray-200 pointer-events-none">
+                EXPLAINER FILM &bull; 16:9
+            </span>
+
+            <!-- Quick Mute / Unmute Toggle -->
+            <button
+                id="uber-mute-btn"
+                type="button"
+                aria-label="Unmute Uber Backend Explainer audio"
+                class="absolute top-3 right-3 z-10 flex items-center gap-1.5 bg-black/75 hover:bg-white hover:text-black border border-white/25 backdrop-blur-sm px-2.5 py-1 rounded text-xs font-bebas tracking-widest text-gray-200 transition-colors cursor-pointer active:scale-95"
+            >
+                <svg id="uber-icon-muted" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6"/>
+                </svg>
+                <svg id="uber-icon-unmuted" class="hidden w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14"/>
+                </svg>
+                <span id="uber-mute-label">MUTED</span>
+            </button>
         </div>
 
         <!-- Project Details -->
@@ -81,46 +109,53 @@
             <div class="col-span-1 md:col-span-2">
                 <h3 class="font-bebas text-3xl tracking-widest text-white mb-4">THE CONCEPT</h3>
                 <p class="text-gray-300 font-light tracking-wide leading-relaxed mb-6">
-                    Uber Backend is a motion graphics explainer video that breaks down how real-time ride dispatch, geolocation matching, and distributed backend systems work behind the scenes in seconds.
+                    This motion graphics explainer breaks down the backend of Uber's driver-matching system—answering a deceptively simple question: how does Uber decide who your driver is? Using crisp map animations, clean vector motion, and kinetic typography, the video contrasts the limitations of a sequential Greedy Algorithm with Uber's batch-based H3 matching approach.
                 </p>
                 <p class="text-gray-300 font-light tracking-wide leading-relaxed">
-                    Using clean vector iconography, smooth morphing transitions, and clear visual hierarchy, complex software architecture concepts are translated into an engaging, easy-to-follow narrative.
+                    It then dives into how machine learning models like Deep ETA (built on Michelangelo AI) weigh live route conditions, historical traffic data, and driver behaviors to minimize average customer wait times across the entire city.
                 </p>
-            </div>
-        </div>
-
-        <!-- Styleframes & Breakdown Grid -->
-        <div class="w-full max-w-5xl mt-20">
-            <h3 class="font-bebas text-3xl tracking-widest text-white mb-6">STYLEFRAMES & BREAKDOWN</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Styleframe 01 -->
-                <div class="aspect-video bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm relative group overflow-hidden flex items-center justify-center">
-                    <p class="font-bebas text-2xl text-[#2a2a2a] tracking-widest group-hover:scale-105 transition-transform duration-500">
-                        STYLEFRAME 01
-                    </p>
-                </div>
-                <!-- Styleframe 02 -->
-                <div class="aspect-video bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm relative group overflow-hidden flex items-center justify-center">
-                    <p class="font-bebas text-2xl text-[#2a2a2a] tracking-widest group-hover:scale-105 transition-transform duration-500">
-                        SYSTEM ARCHITECTURE VISUALS
-                    </p>
-                </div>
-                <!-- Storyboard & Icons -->
-                <div class="aspect-video bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm relative group overflow-hidden flex items-center justify-center">
-                    <p class="font-bebas text-2xl text-[#2a2a2a] tracking-widest group-hover:scale-105 transition-transform duration-500">
-                        STORYBOARD & ICONOGRAPHY
-                    </p>
-                </div>
-                <!-- Motion Timeline -->
-                <div class="aspect-video bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm relative group overflow-hidden flex items-center justify-center">
-                    <p class="font-bebas text-2xl text-[#2a2a2a] tracking-widest group-hover:scale-105 transition-transform duration-500">
-                        AFTER EFFECTS TIMELINE
-                    </p>
-                </div>
             </div>
         </div>
 
     </section>
+
+    <!-- Explainer Video Audio Toggle Script -->
+    <script>
+        const uberVideo = document.getElementById('uber-explainer-video');
+        const uberMuteBtn = document.getElementById('uber-mute-btn');
+        const uberIconMuted = document.getElementById('uber-icon-muted');
+        const uberIconUnmuted = document.getElementById('uber-icon-unmuted');
+        const uberMuteLabel = document.getElementById('uber-mute-label');
+
+        function syncUberMuteUI() {
+            if (!uberVideo || !uberMuteBtn) return;
+            const isMuted = uberVideo.muted;
+            uberIconMuted.classList.toggle('hidden', !isMuted);
+            uberIconUnmuted.classList.toggle('hidden', isMuted);
+            uberMuteLabel.textContent = isMuted ? 'MUTED' : 'SOUND ON';
+
+            uberMuteBtn.setAttribute('aria-label', `${isMuted ? 'Unmute' : 'Mute'} Uber Backend Explainer audio`);
+            uberMuteBtn.classList.toggle('bg-white', !isMuted);
+            uberMuteBtn.classList.toggle('text-black', !isMuted);
+            uberMuteBtn.classList.toggle('border-white', !isMuted);
+            uberMuteBtn.classList.toggle('bg-black/75', isMuted);
+            uberMuteBtn.classList.toggle('text-gray-200', isMuted);
+            uberMuteBtn.classList.toggle('border-white/25', isMuted);
+        }
+
+        if (uberVideo && uberMuteBtn) {
+            uberMuteBtn.addEventListener('click', () => {
+                uberVideo.muted = !uberVideo.muted;
+                if (!uberVideo.muted) {
+                    uberVideo.play().catch(() => {});
+                }
+                syncUberMuteUI();
+            });
+
+            // Keep button synced with native player volume controls
+            uberVideo.addEventListener('volumechange', syncUberMuteUI);
+        }
+    </script>
 
 </body>
 </html>
